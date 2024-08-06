@@ -3,7 +3,7 @@ package com.android.universities
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.android.universities.databinding.ActivityMainBinding
-import com.android.universities.list.ListFragment
+import com.android.universities.module_a.ListFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

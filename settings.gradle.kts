@@ -21,3 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "UAE Universities"
 include(":app")
+include(":app:module_a")
+include(":app:common")

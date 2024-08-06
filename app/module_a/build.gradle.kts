@@ -1,21 +1,18 @@
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.jetbrains.kotlin.kapt)
 }
 
 android {
-    namespace = "com.android.universities"
+    namespace = "com.android.universities.module_a"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.android.universities"
         minSdk = 24
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildFeatures {
@@ -44,6 +41,5 @@ android {
 }
 
 dependencies {
-    implementation(project(":app:module_a"))
     implementation(project(":app:common"))
 }
