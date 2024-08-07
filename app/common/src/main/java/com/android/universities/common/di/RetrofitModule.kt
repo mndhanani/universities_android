@@ -18,7 +18,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object RetrofitModule {
 
-    private const val API_BASE_URL = "http://universities.hipolabs.com/"
+    const val API_BASE_URL = "http://universities.hipolabs.com/"
 
     @Singleton
     @Provides
