@@ -10,5 +10,5 @@ import retrofit2.http.Query
 
 interface UniversitiesRetrofit {
     @GET("search")
-    suspend fun getIconPack(@Query("country") country: String = "United Arab Emirates"): List<UniversityResponse>
+    suspend fun searchUniversities(@Query("country") country: String): List<UniversityResponse>
 }

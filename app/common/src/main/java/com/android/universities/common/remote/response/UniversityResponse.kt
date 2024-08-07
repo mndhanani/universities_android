@@ -14,5 +14,5 @@ data class UniversityResponse(
     val countryCode: String,
 
     @SerializedName("web_pages")
-    val webPages: List<String>,
+    val webPages: List<String>?,
 )
