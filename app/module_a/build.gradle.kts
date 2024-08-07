@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.jetbrains.kotlin.kapt)
+    alias(libs.plugins.dagger.hilt.android)
 }
 
 android {
@@ -42,4 +43,13 @@ android {
 
 dependencies {
     implementation(project(":app:common"))
+
+    // Hilt for dependency injection
+    implementation(libs.hilt)
+    kapt(libs.hilt.compiler)
+
+    // Test
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
 }

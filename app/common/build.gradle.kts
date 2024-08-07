@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.jetbrains.kotlin.kapt)
+    alias(libs.plugins.dagger.hilt.android)
 }
 
 android {
@@ -40,8 +42,17 @@ dependencies {
     api(libs.androidx.appcompat)
     api(libs.material)
 
+    // Hilt for dependency injection
+    implementation(libs.hilt)
+    kapt(libs.hilt.compiler)
+
+    // Retrofit for network calls
+    implementation(libs.retrofit)
+    implementation(libs.google.code.gson)
+    implementation(libs.retrofit.gson.converter)
+
     // Test
-    testApi(libs.junit)
-    androidTestApi(libs.androidx.junit)
-    androidTestApi(libs.androidx.espresso.core)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
 }
