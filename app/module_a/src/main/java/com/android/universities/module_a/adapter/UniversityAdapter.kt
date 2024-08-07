@@ -2,11 +2,13 @@ package com.android.universities.module_a.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.android.universities.common.data.University
 import com.android.universities.module_a.databinding.ListItemUniversityBinding
+import com.android.universities.module_a.util.UniversityDiffCallback
 
-class UniversityAdapter(private val universities: List<University>) :
+class UniversityAdapter(private var universities: List<University>) :
     RecyclerView.Adapter<UniversityAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: ListItemUniversityBinding) : RecyclerView.ViewHolder(binding.root)
@@ -22,4 +24,16 @@ class UniversityAdapter(private val universities: List<University>) :
     }
 
     override fun getItemCount() = universities.size
+
+    /**
+     * Refreshes the list of universities with new data.
+     * It calculates the differences between the current and new list using DiffUtil,
+     * and updates the adapter accordingly.
+     */
+    fun refreshList(newUniversities: List<University>) {
+        val diffCallback = UniversityDiffCallback(universities, newUniversities)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+        universities = newUniversities
+        diffResult.dispatchUpdatesTo(this)
+    }
 }

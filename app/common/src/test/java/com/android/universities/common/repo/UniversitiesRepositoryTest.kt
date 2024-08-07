@@ -3,8 +3,8 @@ package com.android.universities.common.repo
 import com.android.universities.common.data.University
 import com.android.universities.common.remote.UniversitiesRetrofit
 import com.android.universities.common.remote.response.UniversityResponse
+import com.android.universities.common.util.NetworkUtil
 import com.android.universities.common.util.Result
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.test.runTest
 import org.mockito.Mockito.mock
@@ -13,11 +13,10 @@ import org.mockito.exceptions.base.MockitoException
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class UniversitiesRepositoryTest {
-
     private val retrofit: UniversitiesRetrofit = mock()
-    private val repository = UniversitiesRepository(retrofit)
+    private val networkUtil: NetworkUtil = mock()
+    private val repository = UniversitiesRepository(retrofit, networkUtil)
 
     @Test
     fun `test getUniversities success`() = runTest {
@@ -45,6 +44,8 @@ class UniversitiesRepositoryTest {
                 listOf("http://www.adu.ac.ae/")
             )
         )
+        `when`(networkUtil.isConnectedToInternet())
+            .thenReturn(true)
         `when`(retrofit.searchUniversities("United Arab Emirates"))
             .thenReturn(responseList)
         val result = repository.getUniversities().toList()
@@ -66,6 +67,8 @@ class UniversitiesRepositoryTest {
     @Test
     fun `test getUniversities error`() = runTest {
         // Mock result error.
+        `when`(networkUtil.isConnectedToInternet())
+            .thenReturn(true)
         `when`(retrofit.searchUniversities("United Arab Emirates"))
             .thenThrow(MockitoException("Unable to retrieve data."))
         val result = repository.getUniversities().toList()
@@ -73,5 +76,17 @@ class UniversitiesRepositoryTest {
         assertEquals(Result.Status.LOADING, result[0].status)
         assertEquals(Result.Status.ERROR, result[1].status)
         assertEquals("Unable to retrieve data.", result[1].message)
+    }
+
+    @Test
+    fun `test getUniversities no internet`() = runTest {
+        // Mock result error for no internet.
+        `when`(networkUtil.isConnectedToInternet())
+            .thenReturn(false)
+        val result = repository.getUniversities().toList()
+
+        assertEquals(Result.Status.LOADING, result[0].status)
+        assertEquals(Result.Status.ERROR, result[1].status)
+        assertEquals("No internet", result[1].message)
     }
 }
