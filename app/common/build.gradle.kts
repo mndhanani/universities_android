@@ -46,6 +46,11 @@ dependencies {
     implementation(libs.google.code.gson)
     implementation(libs.retrofit.gson.converter)
 
+    // Room Database for local storage
+    implementation(libs.room)
+    kapt(libs.room.compiler)
+    implementation(libs.room.ktx)
+
     // Test
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

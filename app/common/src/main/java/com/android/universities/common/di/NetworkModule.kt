@@ -20,11 +20,11 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideNetworkUtil(connectivityManager: ConnectivityManager) =
+    fun provideNetworkUtil(connectivityManager: ConnectivityManager): NetworkUtil =
         NetworkUtil(connectivityManager)
 
     @Singleton
     @Provides
-    fun provideConnectivityManager(@ApplicationContext context: Context) =
+    fun provideConnectivityManager(@ApplicationContext context: Context): ConnectivityManager =
         context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 }

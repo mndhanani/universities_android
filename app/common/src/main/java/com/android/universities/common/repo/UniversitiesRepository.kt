@@ -3,6 +3,7 @@ package com.android.universities.common.repo
 import com.android.universities.common.data.University
 import com.android.universities.common.remote.UniversitiesRetrofit
 import com.android.universities.common.remote.response.UniversityResponse
+import com.android.universities.common.room.UniversitiesDao
 import com.android.universities.common.util.NetworkUtil
 import com.android.universities.common.util.Result
 import kotlinx.coroutines.flow.Flow
@@ -15,8 +16,9 @@ import javax.inject.Singleton
  */
 @Singleton
 class UniversitiesRepository @Inject constructor(
-    private val retrofit: UniversitiesRetrofit,
     private val networkUtil: NetworkUtil,
+    private val retrofit: UniversitiesRetrofit,
+    private val universitiesDao: UniversitiesDao,
 ) {
 
     suspend fun getUniversities(): Flow<Result<List<University>>> {
@@ -33,25 +35,43 @@ class UniversitiesRepository @Inject constructor(
                              */
                             val universities = responseList.map {
                                 University(
-                                    it.name,
-                                    it.state,
-                                    it.country,
-                                    it.countryCode,
-                                    it.webPages?.firstOrNull()
+                                    name = it.name,
+                                    state = it.state,
+                                    country = it.country,
+                                    countryCode = it.countryCode,
+                                    webPage = it.webPages?.firstOrNull()
                                 )
                             }
+
+                            // Clear the current cache of universities and replace it with a new list.
+                            universitiesDao.refreshCache(universities)
 
                             // Emit Success status with data.
                             emit(Result.success(data = universities))
                         }
                 } catch (e: Exception) {
-                    val message = e.message ?: "Something went wrong"
-                    // Emit Error status with error message.
-                    emit(Result.error(message = message))
+                    val resultOnFailure =
+                        onGetUniversitiesFailure(errorMessage = e.message ?: "Something went wrong")
+                    emit(resultOnFailure)
                 }
             } else {
-                // Emit Error status with `No internet` message.
-                emit(Result.error(message = "No internet"))
+                val resultOnFailure = onGetUniversitiesFailure(errorMessage = "No internet")
+                emit(resultOnFailure)
+            }
+        }
+    }
+
+    /**
+     * On getUniversities failure, fetch the universities from local DB if exists
+     * and return Result with Success status and data,
+     * otherwise return Result with Error status and error message.
+     */
+    private suspend fun onGetUniversitiesFailure(errorMessage: String): Result<List<University>> {
+        universitiesDao.getFromCache().let { universities ->
+            return if (universities.isNotEmpty()) {
+                Result.success(data = universities)
+            } else {
+                Result.error(message = errorMessage)
             }
         }
     }

@@ -13,6 +13,7 @@ lifecycle = "2.8.4"
 hilt = "2.48"
 retrofit = "2.9.0"
 google-code-gson = "2.10.1"
+room = "2.6.1"
 
 # Test
 junit = "4.13.2"
@@ -42,6 +43,11 @@ hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.r
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 google-code-gson = { group = "com.google.code.gson", name = "gson", version.ref = "google-code-gson" }
 retrofit-gson-converter = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
+
+# Room
+room = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 
 # Test
 junit = { group = "junit", name = "junit", version.ref = "junit" }
