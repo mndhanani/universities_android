@@ -9,6 +9,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.android.universities.common.util.LOG_TAG
+import com.android.universities.common.util.Result
+import com.android.universities.module_a.adapter.UniversityAdapter
 import com.android.universities.module_a.databinding.FragmentListBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -37,6 +39,12 @@ class ListFragment : Fragment() {
     private fun setObservers() {
         viewModel.universities.observe(viewLifecycleOwner) {
             Log.d(LOG_TAG, "Universities: ${it.data}")
+
+            if (it.status == Result.Status.SUCCESS) {
+                it.data?.let { universities ->
+                    binding.rvUniversities.adapter = UniversityAdapter(universities)
+                }
+            }
         }
     }
 }
