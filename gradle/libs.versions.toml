@@ -5,6 +5,7 @@ kotlin = "1.9.0"
 coreKtx = "1.13.1"
 appcompat = "1.7.0"
 material = "1.12.0"
+lifecycle = "2.8.4"
 
 hilt = "2.48"
 retrofit = "2.9.0"
@@ -20,9 +21,11 @@ coroutines-test = "1.6.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
-
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+
+# Lifecycle
+androidx-lifecycle = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycle" }
 
 # Hilt
 hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }

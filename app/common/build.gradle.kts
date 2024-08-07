@@ -42,6 +42,9 @@ dependencies {
     api(libs.androidx.appcompat)
     api(libs.material)
 
+    // Lifecycle aware async programming
+    api(libs.androidx.lifecycle)
+
     // Hilt for dependency injection
     implementation(libs.hilt)
     kapt(libs.hilt.compiler)

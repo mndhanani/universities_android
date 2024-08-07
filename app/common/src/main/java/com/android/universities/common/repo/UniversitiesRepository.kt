@@ -2,6 +2,7 @@ package com.android.universities.common.repo
 
 import com.android.universities.common.data.University
 import com.android.universities.common.remote.UniversitiesRetrofit
+import com.android.universities.common.remote.response.UniversityResponse
 import com.android.universities.common.util.Result
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -23,6 +24,9 @@ class UniversitiesRepository @Inject constructor(
 
             try {
                 retrofit.searchUniversities(country = "United Arab Emirates").let { responseList ->
+                    /**
+                     * Map [UniversityResponse] list to [University] list.
+                     */
                     val universities = responseList.map {
                         University(
                             it.name,
