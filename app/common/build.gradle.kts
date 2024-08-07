@@ -58,4 +58,8 @@ dependencies {
 
     // Mocking framework for unit tests
     testImplementation(libs.mockito)
+
+    // Kotlin Coroutines test
+    testImplementation(libs.kotlin.junit)
+    testImplementation(libs.coroutines.test)
 }
