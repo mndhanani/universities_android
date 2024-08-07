@@ -41,8 +41,9 @@ class UniversitiesRepository @Inject constructor(
                     emit(Result.success(data = universities))
                 }
             } catch (e: Exception) {
+                val message = e.message ?: "Something went wrong."
                 // Emit Error status with message.
-                emit(Result.error(message = "Something went wrong."))
+                emit(Result.error(message = message))
             }
         }
     }

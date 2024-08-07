@@ -4,7 +4,12 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.android.universities.databinding.ActivityMainBinding
 import com.android.universities.module_a.ListFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * Indicates Activity as an entry point for Hilt dependency injection.
+ */
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 

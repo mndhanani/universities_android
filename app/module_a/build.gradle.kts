@@ -42,7 +42,18 @@ android {
 }
 
 dependencies {
+    // Modules
     implementation(project(":app:common"))
+
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.fragment)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.material)
+
+    // Lifecycle aware async programming
+    implementation(libs.androidx.lifecycle)
 
     // Hilt for dependency injection
     implementation(libs.hilt)

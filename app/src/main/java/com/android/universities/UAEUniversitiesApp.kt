@@ -4,7 +4,7 @@ import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 
 /**
- * Initialize Hilt
+ * Initializes Hilt and generates necessary components for dependency injection.
  */
 @HiltAndroidApp
 class UAEUniversitiesApp : Application() {

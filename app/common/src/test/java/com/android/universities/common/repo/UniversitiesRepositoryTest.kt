@@ -67,11 +67,11 @@ class UniversitiesRepositoryTest {
     fun `test getUniversities error`() = runTest {
         // Mock result error.
         `when`(retrofit.searchUniversities("United Arab Emirates"))
-            .thenThrow(MockitoException::class.java)
+            .thenThrow(MockitoException("Unable to retrieve data."))
         val result = repository.getUniversities().toList()
 
         assertEquals(Result.Status.LOADING, result[0].status)
         assertEquals(Result.Status.ERROR, result[1].status)
-        assertEquals("Something went wrong.", result[1].message)
+        assertEquals("Unable to retrieve data.", result[1].message)
     }
 }

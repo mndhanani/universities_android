@@ -37,14 +37,6 @@ android {
 }
 
 dependencies {
-    // 'api' exposes these dependencies to the consumers of this module.
-    api(libs.androidx.core.ktx)
-    api(libs.androidx.appcompat)
-    api(libs.material)
-
-    // Lifecycle aware async programming
-    api(libs.androidx.lifecycle)
-
     // Hilt for dependency injection
     implementation(libs.hilt)
     kapt(libs.hilt.compiler)
