@@ -1,12 +1,17 @@
 package com.android.universities
 
+import android.content.Intent
 import android.os.Bundle
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.android.universities.adapter.UniversityAdapter
 import com.android.universities.data.University
 import com.android.universities.databinding.ActivityListBinding
+import com.android.universities.module_b.DetailsActivity
+import com.android.universities.module_b.data.UniversityDetails
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -20,6 +25,8 @@ class ListActivity : AppCompatActivity(), UniversityAdapter.EventListener {
     private lateinit var binding: ActivityListBinding
     private var adapter: UniversityAdapter? = null
 
+    private lateinit var startForResult: ActivityResultLauncher<Intent>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -32,13 +39,30 @@ class ListActivity : AppCompatActivity(), UniversityAdapter.EventListener {
     }
 
     override fun onItemClicked(university: University) {
-
+        val universityDetails = UniversityDetails(
+            university.name,
+            university.state,
+            university.country,
+            university.countryCode,
+            university.webPage
+        )
+        val intent = Intent(this, DetailsActivity::class.java)
+            .putExtra(DetailsActivity.EXTRA_UNIVERSITY_DETAILS, universityDetails)
+        startForResult.launch(intent)
     }
 
     private fun init() {
         // Initialize UniversityAdapter with empty list and assign it to the RecyclerView.
         adapter = UniversityAdapter(emptyList(), this)
         binding.rvUniversities.adapter = adapter
+
+        // Initialize the ActivityResultLauncher.
+        startForResult =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == RESULT_OK) {
+
+                }
+            }
     }
 
     private fun setObservers() {
