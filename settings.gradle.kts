@@ -23,3 +23,4 @@ rootProject.name = "UAE Universities"
 include(":app")
 include(":app:module_a")
 include(":app:common")
+include(":app:module_b")
