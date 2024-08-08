@@ -1,8 +1,0 @@
-<resources>
-    <!-- Base application theme. -->
-    <style name="Base.Theme.UAEUniversities" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-    </style>
-
-    <style name="Theme.UAEUniversities" parent="Base.Theme.UAEUniversities" />
-</resources>
