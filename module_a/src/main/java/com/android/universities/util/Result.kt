@@ -1,7 +1,12 @@
 package com.android.universities.util
 
 /**
- * Generic class for holding success response, message and loading status.
+ * A generic class that holds a value with its loading status.
+ *
+ * @param T The type of the data being held by this result.
+ * @property status The current status of the result.
+ * @property data The data held by the result, if available.
+ * @property message An optional message providing additional details about the result.
  */
 data class Result<out T>(
     val status: Status,
@@ -9,6 +14,9 @@ data class Result<out T>(
     val message: String?,
 ) {
 
+    /**
+     * Enum representing the status of a result.
+     */
     enum class Status {
         SUCCESS,
         ERROR,

@@ -10,8 +10,4 @@ data class UniversityDetails(
     val country: String,
     val countryCode: String,
     val webPage: String?,
-) : Parcelable {
-    override fun toString(): String {
-        return "UniversityDetails(name='$name', state=$state, country='$country', countryCode='$countryCode', webPage=$webPage)"
-    }
-}
+) : Parcelable
