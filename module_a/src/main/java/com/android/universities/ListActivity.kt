@@ -37,6 +37,9 @@ class ListActivity : AppCompatActivity(), UniversityAdapter.EventListener {
         init()
 
         setObservers()
+
+        // Fetch universities from the web service.
+        viewModel.init()
     }
 
     override fun onItemClicked(university: University) {
@@ -67,7 +70,13 @@ class ListActivity : AppCompatActivity(), UniversityAdapter.EventListener {
         startForResult =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == RESULT_OK) {
-
+                    if (result.data?.getBooleanExtra(
+                            DetailsActivity.EXTRA_REFRESH_LIST, false
+                        ) == true
+                    ) {
+                        // Call ListViewModel init to fetch universities from the web service.
+                        viewModel.init()
+                    }
                 }
             }
     }

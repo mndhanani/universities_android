@@ -21,9 +21,7 @@ class ListViewModel @Inject constructor(
     private val _universities = MutableLiveData<Result<List<University>>>()
     val universities: LiveData<Result<List<University>>> get() = _universities
 
-    init {
-        getUniversities()
-    }
+    fun init() = getUniversities()
 
     private fun getUniversities() {
         viewModelScope.launch {

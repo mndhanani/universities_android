@@ -1,3 +1,4 @@
 <resources>
     <string name="details_activity_title">University Details</string>
+    <string name="details_activity_action_refresh">Refresh</string>
 </resources>
