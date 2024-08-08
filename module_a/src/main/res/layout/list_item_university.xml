@@ -32,7 +32,7 @@
             android:text="@{university.name}"
             android:textColor="@android:color/black"
             android:textSize="18sp"
-            app:layout_constraintEnd_toStartOf="@+id/iv_arrow_right"
+            app:layout_constraintEnd_toStartOf="@id/iv_arrow_right"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Mohamed bin Zayed University of Artificial Intelligence (MBZUAI)" />
@@ -47,7 +47,7 @@
             android:textSize="14sp"
             android:visibility="@{university.state == null || university.state.isEmpty() ? View.GONE : View.VISIBLE}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_name"
+            app:layout_constraintTop_toBottomOf="@id/tv_name"
             tools:text="Abu Dhabi" />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -55,7 +55,7 @@
             android:layout_width="42dp"
             android:layout_height="42dp"
             android:layout_marginEnd="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/separator"
+            app:layout_constraintBottom_toTopOf="@id/separator"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_arrow_right" />
@@ -66,7 +66,7 @@
             android:layout_height="1dp"
             android:layout_marginTop="12dp"
             android:background="#E4E4E4"
-            app:layout_constraintTop_toBottomOf="@+id/tv_state" />
+            app:layout_constraintTop_toBottomOf="@id/tv_state" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -25,6 +25,7 @@ class ListActivity : AppCompatActivity(), UniversityAdapter.EventListener {
     private lateinit var binding: ActivityListBinding
     private var adapter: UniversityAdapter? = null
 
+    // Declare a variable for ActivityResultLauncher to launch the intent and receive results.
     private lateinit var startForResult: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,6 +40,9 @@ class ListActivity : AppCompatActivity(), UniversityAdapter.EventListener {
     }
 
     override fun onItemClicked(university: University) {
+        /**
+         * Build Module B's [UniversityDetails] object from [University].
+         */
         val universityDetails = UniversityDetails(
             university.name,
             university.state,
@@ -46,8 +50,11 @@ class ListActivity : AppCompatActivity(), UniversityAdapter.EventListener {
             university.countryCode,
             university.webPage
         )
+
+        // Create an intent to start DetailsActivity and put the UniversityDetails object as an extra.
         val intent = Intent(this, DetailsActivity::class.java)
             .putExtra(DetailsActivity.EXTRA_UNIVERSITY_DETAILS, universityDetails)
+        // Launch the DetailsActivity and expect a result.
         startForResult.launch(intent)
     }
 
@@ -56,7 +63,7 @@ class ListActivity : AppCompatActivity(), UniversityAdapter.EventListener {
         adapter = UniversityAdapter(emptyList(), this)
         binding.rvUniversities.adapter = adapter
 
-        // Initialize the ActivityResultLauncher.
+        // Initialize the ActivityResultLauncher to handle the result from the launched activity.
         startForResult =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == RESULT_OK) {
